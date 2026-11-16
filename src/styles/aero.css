@@ -114,3 +114,21 @@
   background:linear-gradient(180deg,#7fd6ff,#1f86e6 60%,#0d5bb8); box-shadow:0 4px 10px rgba(0,40,110,.4)}
 .sc-pop{position:fixed; left:50%; top:46%; z-index:80; font-size:72px; transform:translate(-50%,-50%); pointer-events:none; animation:scPop 1.3s ease-out forwards}
 @keyframes scPop{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}25%{transform:translate(-50%,-60%) scale(1.25);opacity:1}100%{transform:translate(-50%,-140%) scale(.8);opacity:0}}
+
+/* v182: все остальные кнопки в игре — тоже «Аэро» */
+#ownedVehiclePicker button,.atmC,.chr__btn,.npcd__b,#btnRadio,.rd-btn{
+  border-radius:50%!important;
+  background:radial-gradient(120% 90% at 50% 8%,#bfeaff 0,var(--aero-a) 22%,var(--aero-b) 62%,var(--aero-c) 100%)!important;
+  border:2.5px solid var(--aero-line)!important;color:#fff!important;
+  box-shadow:0 4px 10px rgba(0,40,110,.45),inset 0 -4px 8px rgba(0,30,90,.35),inset 0 2px 2px rgba(255,255,255,.7)!important;
+  text-shadow:0 1px 2px rgba(0,30,80,.6);
+}
+#ownedVehiclePicker button{width:46px;height:46px}
+#ownedVehiclePicker button.on{outline:none!important;box-shadow:0 0 0 3px #ffd84a,0 4px 10px rgba(0,40,110,.45)!important}
+.npcd__b,.chr__btn,.atmC{border-radius:999px!important}
+.npcd__b--alt{background:linear-gradient(180deg,#ffffff,#d9efff)!important;color:#0d3566!important;text-shadow:none}
+.interact.npc-talk{background:linear-gradient(180deg,#7fd6ff,#1f86e6 60%,#0d5bb8)!important;color:#fff!important;border:2.5px solid #fff!important;border-radius:999px!important}
+.atmC.on{box-shadow:0 0 0 3px #ffd84a!important}
+/* радар можно двигать пальцем и масштабировать щипком */
+#sevRadar.sr-live{pointer-events:auto!important;touch-action:none;cursor:grab}
+#sevRadar.sr-drag{cursor:grabbing;box-shadow:0 0 0 3px #ffd84a,0 6px 16px rgba(0,30,90,.5)!important}

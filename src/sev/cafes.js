@@ -207,7 +207,10 @@
       g.fillStyle = '#fff'; g.beginPath(); g.arc(w / 2, 58, 18, 0, 7); g.fill();
     }, true);
     var pin = T.plane('cafe-pin', null, 3.2, 1.6, c[1], 4.6, c[2], pm); pin.billboardMode = 7; pin.setEnabled(false);
-    return { root: root, pin: pin, c: c };
+    // облачко с покупкой жителя
+    var bt = null, bm = T.texMat('buy-' + c[0], 128, 128, function () { }, true);
+    bt = bm.diffuseTexture; var bub = T.plane('cafe-buy', null, 1.3, 1.3, c[1], 3.6, c[2], bm); bub.billboardMode = 7; bub.setEnabled(false);
+    return { root: root, pin: pin, c: c, bub: bub, btex: bt, visitor: null };
   }
   function buildBeacons(T, g) {
     var m = T.texMat('crate-beacon', 128, 128, function (gx, w, h) {
@@ -253,6 +256,7 @@
       if (near) near.pin.setEnabled(true);
       initUI(); ui.btn.hidden = !near; if (!near) closeMenu();
     }
+    npcVisits(st, P);
     // маячки над 14 ближайшими целыми ящиками с едой (до 70 м)
     var crates = (g._crates || []).filter(function (c) { return c.kind === 'food' && c.alive; })
       .map(function (c) { return [Math.hypot(P.x - c.x, P.z - c.z), c]; })
@@ -264,6 +268,52 @@
       if (!b.isEnabled()) { b.position.y = b._y; b.setEnabled(true); }
     });
   }
+  /* жители сами подходят к тележкам и покупают еду */
+  function showBuy(k, item) {
+    var c = k.btex.getContext(); c.clearRect(0, 0, 128, 128);
+    c.fillStyle = 'rgba(255,255,255,.92)'; c.beginPath(); c.arc(64, 60, 54, 0, 7); c.fill();
+    c.strokeStyle = '#1f86e6'; c.lineWidth = 6; c.stroke();
+    c.font = '64px sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(item.e, 64, 64); k.btex.update(true);
+    k.bub.setEnabled(true); k.bubT = 3;
+  }
+  function npcVisits(st, P) {
+    st.vAcc = (st.vAcc || 0) + .25;
+    st.carts.forEach(function (k) {
+      if (k.bubT > 0) { k.bubT -= .25; if (k.bubT <= 0) k.bub.setEnabled(false); }
+      var v = k.visitor; if (!v) return;
+      var n = v.n; v.t += .25;
+      if (!n || !n.rig || n.rig.root.isDisposed && n.rig.root.isDisposed() || v.t > 45) { endVisit(k); return; }
+      if (n.ex && (n.ex.lassoHold || n.ex.lassoFlight || n.ex.flee && n.ex.flee.t > 0)) { endVisit(k); return; }
+      if (!v.bought && Math.hypot(n.x - v.fx, n.z - v.fz) < .8) {
+        v.bought = true; v.leaveT = v.t + 4.5;
+        var item = MENU[(Math.random() * MENU.length) | 0];
+        k.bub.position.set(n.x, (n.y || 0) + 3.2, n.z); showBuy(k, item); try { n.gesture('hop'); } catch (e) { }
+      }
+      if (v.bought && v.t > v.leaveT) endVisit(k);
+    });
+    if (st.vAcc < 6) return; st.vAcc = 0;
+    var M = api && api.manager; if (!M || !M.list) return;
+    st.carts.forEach(function (k) {
+      if (k.visitor || !k.root.isEnabled() || Math.random() < .45) return;
+      var c = k.c, best = null, bd = 70;
+      M.list.forEach(function (n) {
+        if (!n.def || /^cafe-/.test(n.id) || n.talking || n._cafe || n.vis === false) return;
+        if (!n.def.route || n.def.route.length < 2 || n.ex && (n.ex.lassoHold || n.ex.lassoFlight)) return;
+        var d = Math.hypot(n.x - c[1], n.z - c[2]); if (d < bd) { bd = d; best = n; }
+      });
+      if (!best) return;
+      var fx = c[1] + Math.sin(c.h) * 2.1 + (Math.random() - .5), fz = c[2] + Math.cos(c.h) * 2.1 + (Math.random() - .5);
+      var orig = best.def;
+      best.def = Object.assign({}, orig, { route: [{ x: best.x, z: best.z, wait: [.2, .4] }, { x: fx, z: fz, wait: [4, 5], face: c.h + Math.PI }], loop: false });
+      best._cafe = 1; best.wp = 1; best.dir = 1; best.mode = 'walk'; best.timer = 0; best.faceH = null;
+      k.visitor = { n: best, orig: orig, t: 0, fx: fx, fz: fz, bought: false };
+    });
+  }
+  function endVisit(k) {
+    var v = k.visitor; k.visitor = null; if (!v || !v.n) return;
+    var n = v.n; n.def = v.orig; n._cafe = 0; n.wp = 0; n.dir = 1; if (n.mode === 'walk') n.mode = 'idle'; n.timer = 1;
+  }
+
   setInterval(function () {
     var g = window.__sevGame;
     if (!g || !g.scene || g.scene.isDisposed || !g.def || g.def.id !== 'pobedy') return;
