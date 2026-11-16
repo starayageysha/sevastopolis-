@@ -2,16 +2,23 @@
 (function () {
   'use strict';
 
-  /* Каналы (музыка из радио удалена — каналы пока пустые). Чтобы добавить песни на канал: положите файл в radio/<id>.m4a
-     (или вшейте в window.RADIO_AUDIO) и добавьте строку {id, title, dur} в tracks. */
+  /* Каналы. Песни лежат в assets/radio/<id>/, список — src/data/radio-playlist.js
+     (создаётся командой python3 tools/radio_playlist.py). Пустой канал — только эфирное шипение,
+     при включении радио выбирается ближайший канал с песнями.
+     v178: вернули музыку — станции ФанКрым FM, СевастопоЛеди, Радио Памяти, Севастополис FM, Севастопольский РОК. */
+  var RT = window.SEV_RADIO_TRACKS || {};
   var CHANNELS = [
-    { id: 'krymboom', name: 'КрымБум FM',      freq: '87.9',  icon: '🌴', tracks: [] },
-    { id: 'kids',     name: 'Детская волна',   freq: '90.6',  icon: '🧸', tracks: [] },
-    { id: 'ladies',   name: 'СевастопоЛеди',   freq: '93.2',  icon: '🌸', tracks: [] },
-    
-    { id: 'breeze',   name: 'Морской Бриз FM', freq: '101.4', icon: '⚓', tracks: [] },
-    { id: 'fox',      name: 'Fox FM',          freq: '104.8', icon: '🦊', tracks: [] }
+    { id: 'krymboom',  name: 'КрымБум FM',           freq: '87.9',  icon: '🌴' },
+    { id: 'funcrimea', name: 'ФанКрым FM',           freq: '89.4',  icon: '🎉' },
+    { id: 'kids',      name: 'Детская волна',        freq: '90.6',  icon: '🧸' },
+    { id: 'ladies',    name: 'СевастопоЛеди',        freq: '93.2',  icon: '🌸' },
+    { id: 'memory',    name: 'Радио Памяти',         freq: '96.8',  icon: '🕯️' },
+    { id: 'sevfm',     name: 'Севастополис FM',      freq: '99.5',  icon: '📻' },
+    { id: 'breeze',    name: 'Морской Бриз FM',      freq: '101.4', icon: '⚓' },
+    { id: 'rock',      name: 'Севастопольский РОК',  freq: '103.2', icon: '🎸' },
+    { id: 'fox',       name: 'Fox FM',               freq: '104.8', icon: '🦊' }
   ];
+  CHANNELS.forEach(function (c) { c.tracks = RT[c.id] || []; });
 
   var LS_KEY = 'sevradio';
   var saved = {};
@@ -105,7 +112,7 @@
   function hasTracks() { return ch().tracks.length > 0; }
   function curTrack() { var s = st[chIdx], c = ch(); return c.tracks.length ? c.tracks[s.order[s.pos]] : null; }
   function keyOf() { var t = curTrack(); return t ? chIdx + ':' + t.id : ''; }
-  function srcFor(t) { return (window.RADIO_AUDIO && window.RADIO_AUDIO[t.id]) || ('radio/' + t.id + '.m4a'); }
+  function srcFor(t) { return t.src || (window.RADIO_AUDIO && window.RADIO_AUDIO[t.id]) || ('radio/' + t.id + '.m4a'); }
   function fmt(s) { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
 
   /* шум настройки приёмника */

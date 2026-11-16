@@ -1,6 +1,6 @@
 {
   "name": "sevastopolis-3d",
-  "version": "1.77.0",
+  "version": "1.78.0",
   "private": true,
   "description": "Севастополис 3D — игра в открытом мире по мотивам Севастополя (Babylon.js)",
   "scripts": {
