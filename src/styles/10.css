@@ -1,0 +1,18 @@
+
+/* v134: лисёнок с памятником прижат к правому краю (без отступа и без затухания справа); надпись «Севастополис» и «Играть» ниже */
+.sv-title{top:calc(env(safe-area-inset-top,0px) + 78px)}
+.sv-artw{bottom:calc(min(148.84vw,100dvh)*-0.09)}
+body .screen--splash .splash__hot{
+  top:calc(env(safe-area-inset-top,0px) + 78px + min(94vw,520px,81dvh)/2.823 + min(74vw,500px,44dvh)/5.378 + 4px)!important}
+@media (min-aspect-ratio:1/2) and (max-aspect-ratio:99/100){
+  .sv-title{top:calc(env(safe-area-inset-top,0px) + 66px)}
+  .sv-artw{bottom:calc(min(128vw,86dvh)*-0.12)}
+  body .screen--splash .splash__hot{
+    top:calc(env(safe-area-inset-top,0px) + 66px + min(94vw,520px,81dvh)/2.823 + min(60vw,420px,36dvh)/5.378 + 2px)!important}
+}
+@media (min-aspect-ratio:1/1){
+  .sv-artw{padding-right:0;bottom:calc(min(148.84vw,100dvh)*-0.055)}
+  .sv-art{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 6%);mask-image:linear-gradient(to right,transparent 0,#000 6%)}
+  .sv-title{top:14dvh}
+  body .screen--splash .splash__hot{top:52dvh!important}
+}

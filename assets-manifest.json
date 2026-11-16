@@ -1,0 +1,419 @@
+{
+ "source": "Sevastopolis-3D-v176.html",
+ "assets": {
+  "assets/models/fox-hero.glb": {
+   "mime": "model/gltf-binary",
+   "sha1": "8efebe80c7096b91ac5c30457354f1e039fe4536",
+   "bytes": 1297992
+  },
+  "assets/images/chests/georgy.webp": {
+   "mime": "image/webp",
+   "sha1": "3656ef7c128e79f8a90c7a4d95f674d96c9c308a",
+   "bytes": 33636
+  },
+  "assets/images/chests/kerch.webp": {
+   "mime": "image/webp",
+   "sha1": "42cb2bec12e5b7bb6c1ddefb27f330d4b5a8cc52",
+   "bytes": 42698
+  },
+  "assets/images/chests/moscow.webp": {
+   "mime": "image/webp",
+   "sha1": "16036b09a2da25ff53f3f08efd75768b8d413513",
+   "bytes": 49328
+  },
+  "assets/images/chests/odessa.webp": {
+   "mime": "image/webp",
+   "sha1": "a73361c36babf8a38f2bf9e1a26c60f49ba92c28",
+   "bytes": 46194
+  },
+  "assets/images/chests/sevastopol.webp": {
+   "mime": "image/webp",
+   "sha1": "45890ed8ebdf5d41c594de372a940d18796ef980",
+   "bytes": 25728
+  },
+  "assets/images/chests/stalingrad.webp": {
+   "mime": "image/webp",
+   "sha1": "4ff020a0ab1bfddb0d65168e6f4852b33b01973b",
+   "bytes": 25192
+  },
+  "assets/images/chests/tula.webp": {
+   "mime": "image/webp",
+   "sha1": "788b21fe293243a83b2ea3aa9768d5ef8c45526a",
+   "bytes": 37474
+  },
+  "assets/audio/footstep-1.mp3": {
+   "mime": "audio/mpeg",
+   "sha1": "4212024f04ca3d827f71e7b4f03cf53c75aa4464",
+   "bytes": 4223
+  },
+  "assets/audio/footstep-2.mp3": {
+   "mime": "audio/mpeg",
+   "sha1": "c05ef99484aa4adf3bbf1bdf1d3821edbbfc579b",
+   "bytes": 3805
+  },
+  "assets/audio/nature-ambience.mp3": {
+   "mime": "audio/mpeg",
+   "sha1": "2a0c370359252a74a1afffa1aa971273c929409b",
+   "bytes": 608366
+  },
+  "assets/audio/tank-engine.mp3": {
+   "mime": "audio/mpeg",
+   "sha1": "0450efde52e16bd970b3bd7f59cd85f639a54e18",
+   "bytes": 3215488
+  },
+  "assets/images/buildings/hotel-akvamarin-front.webp": {
+   "mime": "image/webp",
+   "sha1": "a04309940b23e905586aad293588e7f5eb8508cd",
+   "bytes": 233546
+  },
+  "assets/images/ui/splash-background.jpg": {
+   "mime": "image/jpeg",
+   "sha1": "da5ae4f07dc49783583bf5a86777d21ff6f8c984",
+   "bytes": 462711
+  },
+  "assets/images/maps/crimea.webp": {
+   "mime": "image/webp",
+   "sha1": "27b8e486e4535d0fe23dbf65c485af8bcb9c124e",
+   "bytes": 377894
+  },
+  "assets/images/maps/sevastopol.webp": {
+   "mime": "image/webp",
+   "sha1": "5e0b788dd68a4764e237208ae7dda9b2845cb116",
+   "bytes": 189934
+  },
+  "assets/images/maps/balaklava.webp": {
+   "mime": "image/webp",
+   "sha1": "257f352d567fd1dc18c5b75227bc4274f257c8e3",
+   "bytes": 616846
+  },
+  "assets/images/maps/yalta.webp": {
+   "mime": "image/webp",
+   "sha1": "6e16d43ab553756e8a3d919461efce54f15e46f1",
+   "bytes": 802592
+  },
+  "assets/images/maps/crimea3d-height.png": {
+   "mime": "image/png",
+   "sha1": "6b36157efa3ea9a97241a28d6f978e6f5342558c",
+   "bytes": 1096611
+  },
+  "assets/images/maps/crimea3d-color.webp": {
+   "mime": "image/webp",
+   "sha1": "68955ea209eaf62a8f0751e268e5557f236e31ad",
+   "bytes": 214058
+  },
+  "assets/audio/splash-music.mp3": {
+   "mime": "audio/mpeg",
+   "sha1": "b42484ad620f96a30097d9f0ca24c1e24f4f37ed",
+   "bytes": 2571971
+  },
+  "assets/images/portraits/fox.jpg": {
+   "mime": "image/jpeg",
+   "sha1": "3a6e73ba7f42cc544244b4e3af1f368f7b32fdc9",
+   "bytes": 9617
+  },
+  "assets/images/portraits/turtle.jpg": {
+   "mime": "image/jpeg",
+   "sha1": "2bfcd886570d54cb619553f9210a8fab319679c9",
+   "bytes": 10113
+  },
+  "assets/images/portraits/sonya.jpg": {
+   "mime": "image/jpeg",
+   "sha1": "4ce04cac3ce6fb969e20321fdd71a554d044aba2",
+   "bytes": 8418
+  },
+  "assets/images/portraits/mushroom.jpg": {
+   "mime": "image/jpeg",
+   "sha1": "66c9eb24ea5c9cb51ffdd71261cadc8056f7cefc",
+   "bytes": 8756
+  },
+  "assets/images/portraits/rabbit.jpg": {
+   "mime": "image/jpeg",
+   "sha1": "1eb6d5cbb0f43503c78b1939fd7c977317a663da",
+   "bytes": 6286
+  },
+  "assets/images/portraits/fairy.jpg": {
+   "mime": "image/jpeg",
+   "sha1": "6898399206205f3e8106fefd101292189f80e6aa",
+   "bytes": 11486
+  },
+  "assets/images/portraits/crystal.jpg": {
+   "mime": "image/jpeg",
+   "sha1": "a1e8b8b8ef0ee402136aa8300cf04a76c7b5241d",
+   "bytes": 10287
+  },
+  "assets/images/portraits/octo.jpg": {
+   "mime": "image/jpeg",
+   "sha1": "c4eb278598a00418b32abef5ef540285c0cc96aa",
+   "bytes": 7283
+  },
+  "assets/images/chronicle/lionimg.webp": {
+   "mime": "image/webp",
+   "sha1": "670d476923a5f37f727c51a41f8125a59eac74b8",
+   "bytes": 46032
+  },
+  "assets/images/chronicle/gspread.webp": {
+   "mime": "image/webp",
+   "sha1": "fe0df54eb5e786d6745163750a9588270e3ffb14",
+   "bytes": 108014
+  },
+  "assets/images/chronicle/fox.webp": {
+   "mime": "image/webp",
+   "sha1": "6afac7fd1e0739177e46b16cd6fa8308a0069b6d",
+   "bytes": 146158
+  },
+  "assets/images/chronicle/cover.webp": {
+   "mime": "image/webp",
+   "sha1": "390df077e5c72ad549f8d6b1a169675c4e0ebe5a",
+   "bytes": 75988
+  },
+  "assets/images/chronicle/spread.webp": {
+   "mime": "image/webp",
+   "sha1": "353b7edcad9ffc7cacb3dc0e5fc069b3114749e3",
+   "bytes": 108776
+  }
+ },
+ "parts": [
+  {
+   "kind": "script",
+   "file": "src/core/game.bundle.js",
+   "attrs": " type=\"module\" crossorigin",
+   "id": null
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/01.css",
+   "attrs": " rel=\"stylesheet\" crossorigin"
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/02.css",
+   "attrs": " id=\"radio-css\""
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/03.css",
+   "attrs": " id=\"water-css\""
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/04.css",
+   "attrs": " id=\"sev-hide-veh\""
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/05.css",
+   "attrs": " id=\"sev-ar-style\""
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/06.css",
+   "attrs": " id=\"sev-splash-photo\""
+  },
+  {
+   "kind": "script",
+   "file": "src/data/02-crimea3d-data.js",
+   "attrs": " id=\"crimea3d-data\"",
+   "id": "crimea3d-data"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/03-crimea3d.js",
+   "attrs": " id=\"crimea3d\"",
+   "id": "crimea3d"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/04-radio-js.js",
+   "attrs": " id=\"radio-js\"",
+   "id": "radio-js"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/05-water-fx.js",
+   "attrs": " id=\"water-fx\"",
+   "id": "water-fx"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/06-sea-life.js",
+   "attrs": " id=\"sea-life\"",
+   "id": "sea-life"
+  },
+  {
+   "kind": "script",
+   "file": "src/data/07-splash-audio.js",
+   "attrs": " id=\"splash-audio\"",
+   "id": "splash-audio"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/08-splash-music.js",
+   "attrs": " id=\"splash-music\"",
+   "id": "splash-music"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/09-sev-grab.js",
+   "attrs": " id=\"sev-grab\"",
+   "id": "sev-grab"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/10-sev-atmosphere.js",
+   "attrs": " id=\"sev-atmosphere\"",
+   "id": "sev-atmosphere"
+  },
+  {
+   "kind": "script",
+   "file": "src/data/11-npc-portraits.js",
+   "attrs": " id=\"npc-portraits\"",
+   "id": "npc-portraits"
+  },
+  {
+   "kind": "script",
+   "file": "src/data/12-glb-hero-data.js",
+   "attrs": " id=\"glb-hero-data\"",
+   "id": "glb-hero-data"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/13-npc-system.js",
+   "attrs": " id=\"npc-system\"",
+   "id": "npc-system"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/14-vehicle-store-hook.js",
+   "attrs": "",
+   "id": null
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/15-sev-chaos.js",
+   "attrs": " id=\"sev-chaos\"",
+   "id": "sev-chaos"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/16-sev-anim.js",
+   "attrs": " id=\"sev-anim\"",
+   "id": "sev-anim"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/17-sev-emote-npc-hook.js",
+   "attrs": " id=\"sev-emote-npc-hook\"",
+   "id": "sev-emote-npc-hook"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/18-lions.js",
+   "attrs": " id=\"lions\"",
+   "id": "lions"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/19-chronicle.js",
+   "attrs": " id=\"chronicle\"",
+   "id": "chronicle"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/20-sev-ar-module.js",
+   "attrs": " id=\"sev-ar-module\"",
+   "id": "sev-ar-module"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/21-sev-ar.js",
+   "attrs": " id=\"sev-ar\"",
+   "id": "sev-ar"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/22-sev-water-passenger-fix-v3.js",
+   "attrs": " id=\"sev-water-passenger-fix-v3\"",
+   "id": "sev-water-passenger-fix-v3"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/23-sev-remove-invisible-world-walls.js",
+   "attrs": " id=\"sev-remove-invisible-world-walls\"",
+   "id": "sev-remove-invisible-world-walls"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/24-sev-distinct-vehicle-engines.js",
+   "attrs": " id=\"sev-distinct-vehicle-engines\"",
+   "id": "sev-distinct-vehicle-engines"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/25-sev-map-sfx.js",
+   "attrs": " id=\"sev-map-sfx\"",
+   "id": "sev-map-sfx"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/26-sev-lightshadow.js",
+   "attrs": " id=\"sev-lightshadow\"",
+   "id": "sev-lightshadow"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/27-sev-perf.js",
+   "attrs": " id=\"sev-perf\"",
+   "id": "sev-perf"
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/28-sev-gfx-pobedy.js",
+   "attrs": " id=\"sev-gfx-pobedy\"",
+   "id": "sev-gfx-pobedy"
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/07.css",
+   "attrs": " id=\"sev-splash-v131-css\""
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/08.css",
+   "attrs": " id=\"sev-splash-v132-css\""
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/09.css",
+   "attrs": " id=\"sev-splash-v133-css\""
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/10.css",
+   "attrs": " id=\"sev-splash-v134-css\""
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/11.css",
+   "attrs": " id=\"sev-splash-v135-css\""
+  },
+  {
+   "kind": "script",
+   "file": "src/addons/29-sev-splash-v131-js.js",
+   "attrs": " id=\"sev-splash-v131-js\"",
+   "id": "sev-splash-v131-js"
+  },
+  {
+   "kind": "style",
+   "file": "src/styles/12.css",
+   "attrs": " id=\"splash-play-low\""
+  }
+ ],
+ "patches": [
+  {
+   "file": "src/core/game.bundle.js",
+   "old": "async function z4(){if(R4)return R4;{let e=atob(L4.slice(L4.indexOf(`,`)+1)),t=new Uint8Array(e.length);for(let n=0;n<e.length;n++)t[n]=e.charCodeAt(n);R4=t}return R4}",
+   "new": "async function z4(){if(R4)return R4;{let r=await fetch(L4);if(!r.ok)throw Error(`fox-hero.glb: HTTP `+r.status);R4=new Uint8Array(await r.arrayBuffer())}return R4}",
+   "why": "модель лисы грузится из файла, а не раскодируется из base64"
+  }
+ ]
+}

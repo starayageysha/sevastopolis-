@@ -1,0 +1,1 @@
+body:not([data-mode="scene"]) #ownedVehiclePicker,body:not([data-mode="scene"]) #btnRide,body:not([data-mode="scene"]) #btnFire,body:not([data-mode="scene"]) #btnGunUp,body:not([data-mode="scene"]) #btnGunDown,body:not([data-mode="scene"]) #btnFlyUp,body:not([data-mode="scene"]) #btnFlyDown,body:not([data-mode="scene"]) #btnJump{display:none!important}

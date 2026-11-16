@@ -1,0 +1,58 @@
+
+/* v128: новая заставка из слоёв. Снизу вверх: размытая картинка → свечение и звёздочки → лисёнок с памятником → дерево.
+   Кнопки (Играть, шестерёнка, кубок, звезда, Об авторе) — прежние невидимые кнопки, которые лежат над слоями. */
+body .screen--splash .splash__bg,body .screen--splash .splash__img{display:none!important}
+body .screen--splash .splash__stage{position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:100%!important;max-width:none!important;aspect-ratio:auto!important;transform:none!important;z-index:1}
+.screen--splash .sv-layers{position:absolute;top:0;left:0;right:0;bottom:0;z-index:0;overflow:hidden;pointer-events:none;background:#4a8fc8}
+.sv-layers img{-webkit-user-select:none;user-select:none;-webkit-user-drag:none;pointer-events:none;display:block}
+.sv-bg{position:absolute;left:-6%;top:-6%;width:112%;height:112%;object-fit:cover;transform-origin:50% 50%;animation:svBgZoom 34s ease-in-out infinite alternate}
+@keyframes svBgZoom{from{transform:scale(1)}to{transform:scale(1.06)}}
+.sv-glow{position:absolute;top:0;left:0;right:0;bottom:0;mix-blend-mode:screen;
+  background:
+   radial-gradient(ellipse 90% 55% at 50% 28%,rgba(255,240,195,.40),rgba(255,240,195,0) 72%),
+   radial-gradient(ellipse 80% 40% at 50% 100%,rgba(205,240,255,.24),rgba(205,240,255,0) 72%),
+   radial-gradient(ellipse 125% 95% at 50% 50%,rgba(255,255,255,0) 55%,rgba(150,205,255,.20) 100%);
+  animation:svGlow 7s ease-in-out infinite alternate}
+@keyframes svGlow{from{opacity:.62}to{opacity:1}}
+.sv-sparks{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
+.sv-artw{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;transform-origin:50% 100%;animation:svArtZoom 26s ease-in-out infinite alternate}
+@keyframes svArtZoom{from{transform:scale(1)}to{transform:scale(1.03)}}
+.sv-art{width:min(100vw,67.192vh);width:min(100vw,67.192dvh);height:auto;aspect-ratio:1024/1524}
+/* если картинка уже экрана (компьютер, планшет, ландшафт) — боковые края мягко растворяются в размытом фоне */
+@media (min-aspect-ratio:1024/1524){.sv-art{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 6%,#000 94%,transparent 100%)}}
+.sv-tree{position:absolute;left:0;top:0;height:100%;width:auto;max-width:none}
+@media (prefers-reduced-motion:reduce){.sv-bg,.sv-glow,.sv-artw{animation:none}}
+
+/* надпись «Севастополис» у верхних веток и цветок в правом нижнем углу */
+.sv-title{position:absolute;left:50%;top:calc(env(safe-area-inset-top,0px) + 10px);transform:translateX(-50%);width:min(94vw,520px,81vh);width:min(94vw,520px,81dvh);height:auto;filter:drop-shadow(0 6px 10px rgba(20,40,70,.35))}
+.sv-flower{position:absolute;right:-2%;bottom:-3%;width:min(max(110px,30vw),300px,46vh);width:min(max(110px,30vw),300px,46dvh);height:auto;filter:drop-shadow(0 3px 6px rgba(20,40,70,.3))}
+
+/* кнопка «Играть»: картинка на месте прежней невидимой кнопки */
+body .screen--splash .splash__hot{position:absolute!important;left:50%!important;right:auto!important;bottom:auto!important;top:calc(env(safe-area-inset-top,0px) + 18px + min(94vw,520px,81dvh)/2.823 + min(86vw,580px,54dvh)/5.378 + 52px)!important;
+  width:min(86vw,580px,54vh)!important;width:min(86vw,580px,54dvh)!important;height:auto!important;aspect-ratio:2.689!important;
+  transform:translate(-50%,-50%)!important;border-radius:0!important;overflow:visible!important;padding:0!important;background:transparent!important}
+@media (min-aspect-ratio:1/1){body .screen--splash .splash__hot{top:calc(env(safe-area-inset-top,0px) + 18px + min(94vw,520px,81dvh)/2.823 + min(86vw,580px,54dvh)/5.378)!important}}
+body .screen--splash .splash__hot::before{content:""!important;display:block!important;position:absolute;top:0;left:0;right:0;bottom:0;background:var(--sv-play) center/100% 100% no-repeat;filter:drop-shadow(0 6px 10px rgba(20,40,70,.38));transition:transform .12s;pointer-events:none}
+body .screen--splash .splash__hot::after{display:none!important}
+body .screen--splash .splash__hot:active::before{transform:scale(.965)}
+
+/* нижние три кнопки: шестерёнка, кубок, звезда */
+body .screen--splash .splash__row{position:absolute!important;left:50%!important;top:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 10px)!important;
+  transform:translateX(-50%)!important;width:min(70vw,300px,48vh)!important;width:min(70vw,300px,48dvh)!important;display:flex;justify-content:space-between;z-index:2}
+body .screen--splash .splash__rb{position:relative!important;width:32%!important;flex:none;aspect-ratio:1!important;border-radius:50%!important;background:transparent!important;box-shadow:none!important}
+body .screen--splash .splash__rb::before{content:"";position:absolute;top:-4%;left:-4%;right:-4%;bottom:-4%;background:center/contain no-repeat;filter:drop-shadow(0 4px 6px rgba(20,40,70,.4));transition:transform .12s;pointer-events:none}
+body .screen--splash .splash__rb[data-pn="set"]::before{background-image:var(--sv-set)}
+body .screen--splash .splash__rb[data-pn="rec"]::before{background-image:var(--sv-rec)}
+body .screen--splash .splash__rb[data-pn="help"]::before{background-image:var(--sv-help)}
+body .screen--splash .splash__rb:active{transform:none!important}
+body .screen--splash .splash__rb:active::before{transform:scale(.93)}
+
+/* «Об авторе»: чуть ниже верхнего левого угла */
+body .screen--splash .splash__ab{left:calc(12px + env(safe-area-inset-left,0px))!important;top:calc(env(safe-area-inset-top,0px) + 16px + min(94vw,520px,81dvh)/2.823)!important;z-index:3}
+/* широкие экраны (компьютер, ландшафт): картинка справа, надпись, «Играть» и нижние кнопки слева в свободном месте */
+@media (min-aspect-ratio:1/1){
+  .sv-artw{justify-content:flex-end;padding-right:6vw;box-sizing:border-box}
+  .sv-title{left:33%}
+  body .screen--splash .splash__hot{left:33%!important}
+  body .screen--splash .splash__row{left:33%!important}
+}

@@ -1,0 +1,1 @@
+@media (max-aspect-ratio:1/1){html body .screen--splash .splash__hot{top:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 10px + min(70vw,300px,48dvh)*.32 + 16px)!important}}

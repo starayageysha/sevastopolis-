@@ -1,0 +1,43 @@
+/* ===== Радио ===== */
+.rd-btn{position:fixed;z-index:12;right:calc(12px + var(--safe-r,0px));top:calc(62px + var(--safe-t,0px))}
+@media (max-width:560px){.rd-btn{top:calc(54px + var(--safe-t,0px))}}
+.rd{position:fixed;z-index:12;right:calc(12px + var(--safe-r,0px));top:calc(62px + var(--safe-t,0px));width:min(332px,calc(100vw - 24px - var(--safe-l,0px) - var(--safe-r,0px)));padding:9px 12px 12px;color:var(--ink);background:linear-gradient(#fff8e4,#f6e7c0);border:3px solid var(--gold);border-radius:18px;box-shadow:0 10px 30px #00000066;-webkit-user-select:none;user-select:none}
+@media (max-width:560px){.rd{top:calc(54px + var(--safe-t,0px))}}
+body:has(.screen--splash.on) .rd,body:has(.screen--splash.on) .rd-btn{display:none!important}
+.rd__top{display:flex;align-items:center;gap:8px;min-height:30px}
+.rd__live{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 8px;border-radius:999px;font:900 11px/1 inherit;letter-spacing:1px;color:#ffe9b8;background:linear-gradient(#c3303a,#85141c);border:2px solid var(--gold)}
+.rd__live.off{background:linear-gradient(#a08a6a,#6f5a3c);border-color:#c9b48a}
+.rd__eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.rd__eq i{display:block;width:3px;height:3px;border-radius:1px;background:#ffd36a}
+.rd--on .rd__eq i{animation:rdEq .9s ease-in-out infinite}
+.rd--on .rd__eq i:nth-child(2){animation-delay:-.3s}
+.rd--on .rd__eq i:nth-child(3){animation-delay:-.6s}
+.rd--on .rd__eq i:nth-child(4){animation-delay:-.15s}
+@keyframes rdEq{0%,100%{height:3px}50%{height:12px}}
+.rd__sp{flex:1}
+.rd__x{width:34px;height:34px;font-size:22px;line-height:1;color:#ffe9c0;cursor:pointer;background:linear-gradient(#a06f3a,#7b4c24);border:2px solid #4a2a10;border-radius:50%}
+.rd__tune{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:8px;margin-top:6px}
+.rd__b{height:44px;cursor:pointer;font-size:20px;line-height:1;color:#ffe9c0;background:linear-gradient(#a06f3a,#7b4c24);border:2px solid #4a2a10;border-radius:12px;box-shadow:0 2px #34200c}
+.rd__b:active{transform:translateY(1px)}
+.rd__b:disabled{opacity:.45;cursor:default}
+.rd__b--play{width:58px;font-size:22px;color:var(--ink);background:linear-gradient(#ffe08a,#e0a030);border:3px solid #7a4a10;box-shadow:0 3px #7a4a10}
+.rd__name{text-align:center;min-width:0}
+.rd__name b{display:block;font-size:19px;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rd__name small{display:block;font-size:12px;font-weight:800;color:#a36b00;letter-spacing:.5px}
+.rd__dial{position:relative;display:grid;grid-template-columns:repeat(var(--n,5),1fr);margin:6px 0 2px;padding-bottom:8px;background:repeating-linear-gradient(90deg,#b98a4a 0 1px,transparent 1px 6px) bottom/100% 5px no-repeat}
+.rd__st{height:34px;font-size:20px;line-height:1;cursor:pointer;background:none;border:0;opacity:.5;transition:opacity .2s,transform .2s}
+.rd__st.on{opacity:1;transform:scale(1.18)}
+.rd__needle{position:absolute;left:0;bottom:0;width:calc(100% / var(--n,5));height:100%;pointer-events:none;transition:transform .55s cubic-bezier(.3,1.35,.5,1)}
+.rd__needle::after{content:"";position:absolute;left:50%;bottom:0;width:2px;height:100%;margin-left:-1px;border-radius:2px;background:var(--red)}
+.rd__now{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font-size:14px;font-weight:800}
+.rd__now span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rd__now span:last-child{flex:none;font-variant-numeric:tabular-nums;opacity:.75;font-size:12px;align-self:center}
+.rd__bar{height:7px;margin-top:5px;border-radius:99px;overflow:hidden;background:#e6d3a2;border:1.5px solid #b98a4a}
+.rd__bar i{display:block;height:100%;width:0;background:linear-gradient(#ff7a6a,#c3303a)}
+.rd__ctrl{display:flex;align-items:center;gap:8px;margin-top:9px}
+.rd__ctrl .rd__b{width:48px}
+.rd__ctrl .rd__b--play{width:58px}
+.rd__vol{flex:1;min-width:0;display:flex;align-items:center;gap:6px;margin-left:4px;font-size:16px}
+.rd__vol input{flex:1;min-width:0;width:100%;height:28px;accent-color:#c3303a;touch-action:pan-x;margin:0}
+@media (max-height:430px){.rd{padding:7px 10px 9px}.rd__tune{margin-top:3px}.rd__b{height:38px}.rd__ctrl{margin-top:6px}.rd__st{height:28px}}
+@media (prefers-reduced-motion:reduce){.rd--on .rd__eq i{animation:none;height:8px}.rd__needle{transition:none}}

@@ -1,0 +1,1 @@
+window.SPLASH_AUDIO="assets/audio/splash-music.mp3";

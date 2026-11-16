@@ -1,0 +1,19 @@
+# Заголовки для Cloudflare Pages (на GitHub Pages и обычных хостингах файл просто игнорируется).
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Модель героя: правильный MIME-тип для .glb
+/assets/models/*.glb
+  Content-Type: model/gltf-binary
+
+# Картинки, звуки и модели меняются только с новой версией игры
+/assets/*
+  Cache-Control: public, max-age=604800
+
+# Код и стили — короткий кэш, чтобы новая версия подхватывалась быстро
+/src/*
+  Cache-Control: public, max-age=300, must-revalidate
+/index.html
+  Cache-Control: no-cache

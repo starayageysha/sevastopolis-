@@ -1,0 +1,1 @@
+window.__CRIMEA3D_DATA={h:"assets/images/maps/crimea3d-height.png",c:"assets/images/maps/crimea3d-color.webp",lo:-0.07,hi:0.13};

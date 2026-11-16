@@ -1,0 +1,17 @@
+
+/* v135: картинка с лисёнком и храмом всегда прижата к правому краю экрана (на любом устройстве), при «дыхании» правый край не уезжает;
+   «Севастополис» и «Играть» опущены ещё на 1 см */
+.sv-artw{justify-content:flex-end!important;padding-right:0!important;transform-origin:100% 100%!important}
+@media (min-aspect-ratio:1024/1524){.sv-art{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 6%);mask-image:linear-gradient(to right,transparent 0,#000 6%)}}
+.sv-title{top:calc(env(safe-area-inset-top,0px) + 78px + 1cm)}
+body .screen--splash .splash__hot{
+  top:calc(env(safe-area-inset-top,0px) + 78px + 1cm + min(94vw,520px,81dvh)/2.823 + min(74vw,500px,44dvh)/5.378 + 4px)!important}
+@media (min-aspect-ratio:1/2) and (max-aspect-ratio:99/100){
+  .sv-title{top:calc(env(safe-area-inset-top,0px) + 66px + 1cm)}
+  body .screen--splash .splash__hot{
+    top:calc(env(safe-area-inset-top,0px) + 66px + 1cm + min(94vw,520px,81dvh)/2.823 + min(60vw,420px,36dvh)/5.378 + 2px)!important}
+}
+@media (min-aspect-ratio:1/1){
+  .sv-title{top:calc(14dvh + 1cm)}
+  body .screen--splash .splash__hot{top:calc(52dvh + 1cm)!important}
+}

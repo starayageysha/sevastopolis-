@@ -1,0 +1,17 @@
+
+/* v133: «Об авторе» — в самый верхний левый угол; надпись «Севастополис» и «Играть» ниже; «Играть» крупнее, по центру */
+body .screen--splash .splash__ab{top:calc(env(safe-area-inset-top,0px) + 10px)!important;left:calc(10px + env(safe-area-inset-left,0px))!important}
+.sv-title{top:calc(env(safe-area-inset-top,0px) + 46px)}
+body .screen--splash .splash__hot{width:min(74vw,500px,44vh)!important;width:min(74vw,500px,44dvh)!important;
+  top:calc(env(safe-area-inset-top,0px) + 46px + min(94vw,520px,81dvh)/2.823 + min(74vw,500px,44dvh)/5.378 + 4px)!important}
+@media (min-aspect-ratio:1/2) and (max-aspect-ratio:99/100){
+  .sv-art{width:min(86vw,57.8dvh)}
+  .sv-artw{bottom:calc(min(128vw,86dvh)*-0.12)}
+  body .screen--splash .splash__hot{width:min(60vw,420px,36vh)!important;width:min(60vw,420px,36dvh)!important;
+    top:calc(env(safe-area-inset-top,0px) + 46px + min(94vw,520px,81dvh)/2.823 + min(60vw,420px,36dvh)/5.378 + 2px)!important}
+}
+@media (min-aspect-ratio:1/1){
+  .sv-title{top:calc(env(safe-area-inset-top,0px) + 10px)}
+  body .screen--splash .splash__hot{width:min(30vw,420px,50vh)!important;width:min(30vw,420px,50dvh)!important;
+    top:calc(env(safe-area-inset-top,0px) + 10px + min(94vw,520px,81dvh)/2.823 + min(30vw,420px,50dvh)/5.378 + 8px)!important}
+}

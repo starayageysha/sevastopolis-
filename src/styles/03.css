@@ -1,0 +1,12 @@
+
+/* ===== Вода на карте ===== */
+.wf{position:absolute;display:block;pointer-events:none}
+.rip{position:absolute;width:0;height:0;pointer-events:none;z-index:2}
+.rip i{position:absolute;left:-70px;top:-70px;width:140px;height:140px;box-sizing:border-box;border-radius:50%;border:3px solid rgba(255,255,255,.95);box-shadow:0 0 8px rgba(255,255,255,.55),inset 0 0 8px rgba(255,255,255,.35);opacity:0;transform:scale(.04);animation:ripOut 1.7s cubic-bezier(.18,.6,.3,1) forwards}
+.rip i:nth-child(2){animation-delay:.2s}
+.rip i:nth-child(3){animation-delay:.4s}
+.rip b{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.95);box-shadow:0 0 10px #fff;opacity:0;animation:ripDot .7s ease-out forwards}
+@keyframes ripOut{0%{opacity:.95;transform:scale(.04);border-width:4px}60%{opacity:.55}100%{opacity:0;transform:scale(1.45);border-width:1px}}
+@keyframes ripDot{0%{opacity:1;transform:scale(1.4)}100%{opacity:0;transform:scale(.2) translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.rip i{animation-duration:.01s}}
+/* радио доступно на карте и в локациях; на заставке скрыто правилом выше */

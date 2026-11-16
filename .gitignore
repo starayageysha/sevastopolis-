@@ -1,3 +1,25 @@
+# Сборки (создаются командой npm run build:single)
+dist/
+
+# Временное и кэш
+node_modules/
+.cache/
+__pycache__/
+*.pyc
+*.log
+*.tmp
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Результаты тестов и профилирования
+tools/test/out/
+
+# Архивы версий храним на компьютере, в git — только исходники
 *.zip
+
+# Секреты
+.env
+.env.*
+*.pem
+*.key

@@ -1,0 +1,17 @@
+
+/* v132: 1) лисёнок с памятником опущен вниз — виден орёл на вершине памятника; 2) кнопка «Играть» меньше и выше, не лежит на памятнике;
+   3) сияние и звёздочки подняты над картинкой и деревом (под надписью и цветком) */
+.sv-artw{bottom:calc(min(148.84vw,100dvh)*-0.055)}
+.sv-glow,.sv-sparks{z-index:3}
+.sv-title,.sv-flower{z-index:4}
+body .screen--splash .splash__hot{
+  width:min(62vw,420px,38vh)!important;width:min(62vw,420px,38dvh)!important;
+  top:calc(env(safe-area-inset-top,0px) + 18px + min(94vw,520px,81dvh)/2.823 + min(62vw,420px,38dvh)/5.378 + 26px)!important}
+@media (min-aspect-ratio:1/1){body .screen--splash .splash__hot{top:calc(env(safe-area-inset-top,0px) + 18px + min(94vw,520px,81dvh)/2.823 + min(62vw,420px,38dvh)/5.378)!important}}
+/* невысокие телефоны (16:9, SE): картинка чуть меньше и ниже, кнопка меньше — чтобы орёл на памятнике не прятался за кнопкой */
+@media (min-aspect-ratio:1/2) and (max-aspect-ratio:99/100){
+  .sv-art{width:min(92vw,61.8dvh)}
+  .sv-artw{bottom:calc(min(137vw,92dvh)*-0.11)}
+  body .screen--splash .splash__hot{width:min(52vw,360px,32dvh)!important;
+    top:calc(env(safe-area-inset-top,0px) + 18px + min(94vw,520px,81dvh)/2.823 + min(52vw,360px,32dvh)/5.378 + 6px)!important}
+}
