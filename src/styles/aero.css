@@ -1,0 +1,116 @@
+/* =====================================================================
+   v181 — оформление «Аэро»: голубые глянцевые круглые кнопки,
+   стеклянные плашки, круглая миникарта в голубой рамке.
+   Только CSS поверх старых стилей, разметку и логику не меняет.
+   ===================================================================== */
+:root{
+  --aero-a:#5fc8ff; --aero-b:#1a7fe0; --aero-c:#0b4fa8;
+  --aero-glass:rgba(16,70,150,.62); --aero-line:rgba(255,255,255,.85);
+}
+/* круглые кнопки HUD */
+.hud__btn{
+  border-radius:50%!important;
+  background:radial-gradient(120% 90% at 50% 8%,#bfeaff 0,var(--aero-a) 22%,var(--aero-b) 62%,var(--aero-c) 100%)!important;
+  border:2.5px solid var(--aero-line)!important;
+  box-shadow:0 4px 10px rgba(0,40,110,.45),inset 0 -4px 8px rgba(0,30,90,.35),inset 0 2px 2px rgba(255,255,255,.7)!important;
+  color:#fff!important; text-shadow:0 1px 2px rgba(0,30,80,.6);
+  position:relative; overflow:hidden;
+}
+.hud__btn::before{ /* блик сверху, как на стекле */
+  content:""; position:absolute; left:14%; right:14%; top:5%; height:42%;
+  border-radius:50% 50% 45% 45%/60% 60% 40% 40%;
+  background:linear-gradient(rgba(255,255,255,.75),rgba(255,255,255,.08));
+  pointer-events:none;
+}
+.hud__btn:active{transform:scale(.93); filter:brightness(1.1)}
+.hud__btn--on{box-shadow:0 0 0 3px #ffd84a,0 4px 10px rgba(0,40,110,.45)!important}
+.hud__btn svg path{fill:#fff}
+
+/* плашки: задание, монетки, подсказка */
+.hud__quest,.hint{
+  background:linear-gradient(180deg,rgba(40,120,210,.78),var(--aero-glass))!important;
+  border:2px solid var(--aero-line)!important; color:#fff!important;
+  border-radius:999px!important;
+  box-shadow:0 4px 12px rgba(0,30,90,.35),inset 0 1px 1px rgba(255,255,255,.6)!important;
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  text-shadow:0 1px 2px rgba(0,20,60,.6);
+}
+.hud__coins{padding-left:14px!important;padding-right:16px!important}
+
+/* кнопка действия */
+.interact{
+  background:linear-gradient(180deg,#7fd6ff,#1f86e6 60%,#0d5bb8)!important;
+  color:#fff!important; border:2.5px solid #fff!important; border-radius:999px!important;
+  box-shadow:0 5px 14px rgba(0,40,110,.5),inset 0 2px 2px rgba(255,255,255,.65)!important;
+  text-shadow:0 1px 2px rgba(0,30,80,.7);
+}
+
+/* круглая миникарта */
+#sevRadar{
+  border:4px solid #fff!important;
+  box-shadow:0 0 0 3px var(--aero-b),0 6px 16px rgba(0,30,90,.5)!important;
+}
+
+/* джойстик — стеклянный голубой */
+.joystick__base{
+  background:radial-gradient(circle at 50% 35%,rgba(170,225,255,.45),rgba(30,110,200,.38))!important;
+  border:2.5px solid rgba(255,255,255,.8)!important;
+  box-shadow:0 4px 14px rgba(0,30,90,.35),inset 0 0 18px rgba(255,255,255,.25)!important;
+}
+.joystick__knob{
+  background:radial-gradient(circle at 40% 30%,#ffffff,#bfe6ff 45%,#5aaef0)!important;
+  border:2px solid #fff!important; box-shadow:0 3px 8px rgba(0,30,90,.45)!important;
+}
+
+/* окна: карточка места, магазин, квесты */
+.card__panel{
+  background:linear-gradient(180deg,rgba(235,248,255,.97),rgba(200,232,255,.96))!important;
+  border:3px solid #fff!important; border-radius:24px!important;
+  box-shadow:0 0 0 3px var(--aero-b),0 14px 34px rgba(0,30,90,.45)!important;
+  color:#0d3566!important;
+}
+.card__title{color:#0b4fa8!important}
+.card__ok,.card__act{
+  background:linear-gradient(180deg,#7fd6ff,#1f86e6 60%,#0d5bb8)!important; color:#fff!important;
+  border:2px solid #fff!important; border-radius:999px!important;
+  box-shadow:0 4px 10px rgba(0,40,110,.4),inset 0 2px 2px rgba(255,255,255,.6)!important;
+}
+.card__close{background:#1f86e6!important;color:#fff!important;border-radius:50%!important;border:2px solid #fff!important}
+
+/* ---------- кафе: кнопка и меню ---------- */
+#sevCafeBtn{
+  position:fixed; left:50%; transform:translateX(-50%); bottom:calc(118px + env(safe-area-inset-bottom,0px)); z-index:55;
+  font:900 17px Nunito,Arial,sans-serif; color:#5a3200; padding:11px 22px;
+  background:linear-gradient(180deg,#fff3a6,#ffd21f 55%,#f2a600); border:3px solid #fff; border-radius:999px;
+  box-shadow:0 0 0 2px #e09000,0 6px 16px rgba(0,0,0,.35),inset 0 2px 2px rgba(255,255,255,.8);
+  animation:scPulse 1.4s ease-in-out infinite;
+}
+#sevCafeBtn[hidden]{display:none}
+@keyframes scPulse{50%{transform:translateX(-50%) scale(1.06)}}
+#sevCafe{position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; background:rgba(0,30,80,.35)}
+#sevCafe[hidden]{display:none}
+#sevCafe .sc-panel{
+  position:relative; width:min(92vw,420px); max-height:88vh; overflow:auto; padding:16px 16px 14px;
+  background:linear-gradient(180deg,rgba(235,248,255,.98),rgba(195,230,255,.97));
+  border:3px solid #fff; border-radius:24px; box-shadow:0 0 0 3px #1a7fe0,0 14px 34px rgba(0,30,90,.5);
+  font-family:Nunito,Arial,sans-serif; color:#0d3566; text-align:center;
+}
+#sevCafe .sc-title{margin:2px 0 2px; font-size:22px; color:#0b4fa8}
+#sevCafe .sc-sub{margin:0 0 10px; font-size:13px; opacity:.8}
+#sevCafe .sc-coins{margin:0; font-weight:900; color:#b26b00}
+#sevCafe .sc-list{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+#sevCafe .sc-item{
+  display:flex; align-items:center; gap:6px; padding:8px 10px; border-radius:16px; cursor:pointer;
+  background:linear-gradient(180deg,#ffffff,#d9efff); border:2px solid #8fcaf5; color:#0d3566;
+  font:800 14px Nunito,Arial,sans-serif; box-shadow:0 2px 6px rgba(0,40,110,.18);
+}
+#sevCafe .sc-item:active{transform:scale(.96)}
+#sevCafe .sc-item.poor{opacity:.55}
+#sevCafe .sc-e{font-size:26px}
+#sevCafe .sc-n{flex:1; text-align:left}
+#sevCafe .sc-p{color:#b26b00; white-space:nowrap}
+#sevCafe .sc-x{position:absolute; right:10px; top:10px; width:32px; height:32px; border-radius:50%; border:2px solid #fff; background:#1f86e6; color:#fff; font-size:20px; line-height:1}
+#sevCafe .sc-ok{margin-top:12px; padding:10px 28px; border-radius:999px; border:2px solid #fff; color:#fff; font:900 15px Nunito,Arial,sans-serif;
+  background:linear-gradient(180deg,#7fd6ff,#1f86e6 60%,#0d5bb8); box-shadow:0 4px 10px rgba(0,40,110,.4)}
+.sc-pop{position:fixed; left:50%; top:46%; z-index:80; font-size:72px; transform:translate(-50%,-50%); pointer-events:none; animation:scPop 1.3s ease-out forwards}
+@keyframes scPop{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}25%{transform:translate(-50%,-60%) scale(1.25);opacity:1}100%{transform:translate(-50%,-140%) scale(.8);opacity:0}}
