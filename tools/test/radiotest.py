@@ -39,7 +39,7 @@ async def main():
         R['checks']['4_next_song'] = await pg.evaluate(RADIO)
         await pg.screenshot(path=OUT + '_panel.png')
         # все файлы песен из списка отдаются сервером
-        R['checks']['5_all_files'] = await pg.evaluate("""(async()=>{const T=window.SEV_RADIO_TRACKS,bad=[];let n=0;
+        R['checks']['5_all_files'] = await pg.evaluate("""(async()=>{if(location.protocol==='file:')return 'пропущено: fetch недоступен для file://';const T=window.SEV_RADIO_TRACKS,bad=[];let n=0;
             for(const ch in T)for(const t of T[ch]){n++;const r=await fetch(t.src,{method:'HEAD'});if(!r.ok)bad.push(t.src+' '+r.status)}
             return {tracks:n,bad}})()""")
         R['http_errors'] = bad
