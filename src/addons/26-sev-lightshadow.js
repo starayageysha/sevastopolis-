@@ -35,7 +35,8 @@ function scan(){
     if(m.__ls)continue;
     if(m.isVisible===false)continue;       /* скрытые перепроверим позже */
     c=cls(m);m.__ls=1;
-    if(c>=1&&!m.receiveShadows)m.receiveShadows=true;
+    /* v177: у копий (instances) тени берутся от исходного меша; Babylon на них только пишет предупреждение */
+    if(c>=1&&!m.receiveShadows&&!m.isAnInstance)m.receiveShadows=true;
     if(c===2)addCand(m,false);
   }
 }

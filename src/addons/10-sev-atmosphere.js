@@ -182,7 +182,11 @@ function frame(now){
   var nn=Math.max(0,Math.min(1,(1-v.lvl)/.8)),ww=Math.min(1,v.warm);
   if(sc.__seaDim){var dmm=sc.__seaDimM,al=Math.max(nn*.5,ww*.2*(1-nn));dmm.alpha=al;sc.__seaDim.setEnabled(al>.01);dmm.emissiveColor.r=mx(.95,.02,nn);dmm.emissiveColor.g=mx(.45,.05,nn);dmm.emissiveColor.b=mx(.22,.14,nn)}
   if(base.amb){var ak=mx(1,.62,nn);sc.ambientColor.r=base.amb[0]*ak;sc.ambientColor.g=base.amb[1]*ak;sc.ambientColor.b=base.amb[2]*mx(ak,1,.15)}
-  sc.imageProcessingConfiguration.exposure=mx(1,.92,nn)*(window.__gfxExp||1);
+  /* Оптимизация v177: яркость — это uniform шейдера, Babylon передаёт её при каждой отрисовке материала.
+     Сеттер .exposure при любом изменении помечал «грязными» все материалы × все меши сцены (больше половины
+     времени процессора). Плавные изменения пишем напрямую, полный сеттер — только при заметном скачке. */
+  var ipc=sc.imageProcessingConfiguration,exv=mx(1,.92,nn)*(window.__gfxExp||1);
+  if(Math.abs(ipc._exposure-exv)>.02)ipc.exposure=exv;else ipc._exposure=exv;
   /* фонари */
   var lamp=Math.max(v.lamp,cur.gr*.9),fl=1+Math.sin(now/230)*.04;
   bulbM.forEach(function(m){var e=m.__e0;m.emissiveColor.r=mx(e.r,1,lamp);m.emissiveColor.g=mx(e.g,.82,lamp);m.emissiveColor.b=mx(e.b,.42,lamp)});
