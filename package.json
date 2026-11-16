@@ -1,12 +1,16 @@
 {
   "name": "sevastopolis-3d",
-  "version": "1.78.0",
+  "version": "1.79.0",
   "private": true,
   "description": "Севастополис 3D — игра в открытом мире по мотивам Севастополя (Babylon.js)",
   "scripts": {
     "dev": "npx --yes serve@14 -l 8080 .",
     "build:single": "python3 -I tools/build_single.py . dist/Sevastopolis-3D-single.html",
     "test": "python3 tools/test/functest.py \"http://localhost:8080/index.html?debug\" tools/test/out/functest",
-    "bench": "python3 tools/test/bench.py \"http://localhost:8080/index.html?debug\" tools/test/out/bench \"Парк Победы\""
+    "bench": "python3 tools/test/bench.py \"http://localhost:8080/index.html?debug\" tools/test/out/bench \"Парк Победы\"",
+    "test:save": "python3 tools/test/savetest.py http://localhost:8080/v_old/index.html http://localhost:8080/index.html tools/test/out/save",
+    "test:visual": "python3 tools/test/visualtest.py shoot http://localhost:8080/index.html tools/test/out/frames",
+    "test:soak": "python3 tools/test/soaktest.py http://localhost:8080/index.html 30 tools/test/out/soak",
+    "test:radio": "python3 tools/test/radiotest.py \"http://localhost:8080/index.html?debug\" tools/test/out/radio"
   }
 }

@@ -5,17 +5,15 @@
   /* Каналы. Песни лежат в assets/radio/<id>/, список — src/data/radio-playlist.js
      (создаётся командой python3 tools/radio_playlist.py). Пустой канал — только эфирное шипение,
      при включении радио выбирается ближайший канал с песнями.
-     v178: вернули музыку — станции ФанКрым FM, СевастопоЛеди, Радио Памяти, Севастополис FM, Севастопольский РОК. */
+     v178: вернули музыку. v179: по решению автора убраны станции «Радио Памяти», «Севастопольский РОК»,
+     «ФанКрым FM»; песни СевастопоЛеди и Севастополис FM пережаты в MP3 моно 32 кбит/с. */
   var RT = window.SEV_RADIO_TRACKS || {};
   var CHANNELS = [
     { id: 'krymboom',  name: 'КрымБум FM',           freq: '87.9',  icon: '🌴' },
-    { id: 'funcrimea', name: 'ФанКрым FM',           freq: '89.4',  icon: '🎉' },
     { id: 'kids',      name: 'Детская волна',        freq: '90.6',  icon: '🧸' },
     { id: 'ladies',    name: 'СевастопоЛеди',        freq: '93.2',  icon: '🌸' },
-    { id: 'memory',    name: 'Радио Памяти',         freq: '96.8',  icon: '🕯️' },
     { id: 'sevfm',     name: 'Севастополис FM',      freq: '99.5',  icon: '📻' },
     { id: 'breeze',    name: 'Морской Бриз FM',      freq: '101.4', icon: '⚓' },
-    { id: 'rock',      name: 'Севастопольский РОК',  freq: '103.2', icon: '🎸' },
     { id: 'fox',       name: 'Fox FM',               freq: '104.8', icon: '🦊' }
   ];
   CHANNELS.forEach(function (c) { c.tracks = RT[c.id] || []; });
