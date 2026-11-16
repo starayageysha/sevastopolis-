@@ -132,3 +132,4 @@
 /* радар можно двигать пальцем и масштабировать щипком */
 #sevRadar.sr-live{pointer-events:auto!important;touch-action:none;cursor:grab}
 #sevRadar.sr-drag{cursor:grabbing;box-shadow:0 0 0 3px #ffd84a,0 6px 16px rgba(0,30,90,.5)!important}
+#grabTip{background:linear-gradient(180deg,rgba(40,120,210,.85),rgba(16,70,150,.8))!important;border:2px solid #fff!important;color:#fff!important;border-radius:999px!important;box-shadow:0 4px 12px rgba(0,30,90,.35)!important}

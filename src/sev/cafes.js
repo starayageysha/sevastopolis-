@@ -110,6 +110,7 @@
     if (s.coins < PRICE) { toast('😿 Не хватает монеток<br><small>Нужно ' + PRICE + ' 🪙 — собери их в городе</small>'); return; }
     s.coins -= PRICE; try { s._save(); s._emit && s._emit(); } catch (e) { }
     try { window.__sevSetHunger && window.__sevSetHunger(0); localStorage.setItem('sevHunger', '0'); } catch (e) { }
+    try { window.dispatchEvent(new CustomEvent('sev:eat', { detail: { k: m.id, cafe: true } })); } catch (e) { }
     refreshCoins();
     toast(m.e + ' Ням-ням! ' + m.n + '<br><small>Лисёнок сыт!</small>');
     var pop = el('div', null, m.e); pop.className = 'sc-pop'; document.body.appendChild(pop);
@@ -210,6 +211,13 @@
     // облачко с покупкой жителя
     var bt = null, bm = T.texMat('buy-' + c[0], 128, 128, function () { }, true);
     bt = bm.diffuseTexture; var bub = T.plane('cafe-buy', null, 1.3, 1.3, c[1], 3.6, c[2], bm); bub.billboardMode = 7; bub.setEnabled(false);
+    // твёрдая тележка: препятствие для лисёнка и жителей + коллизия корпуса для транспорта
+    try {
+      var g0 = window.__sevGame, obs = [g0 && g0.world && g0.world.ctx && g0.world.ctx.obstacles, g0 && g0.player && g0.player.obstacles].filter(function (o, i, A) { return o && A.indexOf(o) === i; });
+      obs.forEach(function (ob) { var ux = Math.cos(c.h), uz = -Math.sin(c.h); [-1, 0, 1].forEach(function (s) { ob.circle(c[1] + ux * s * .95, c[2] + uz * s * .95, .85); });
+        var tx = c[1] + Math.cos(c.h) * 2.6 + Math.sin(c.h) * 1.2, tz = c[2] - Math.sin(c.h) * 2.6 + Math.cos(c.h) * 1.2; ob.circle(tx, tz, .65); });
+      T.all.forEach(function (m) { if (/cafe-(body|top)/.test(m.name)) m.checkCollisions = true; });
+    } catch (e) { console.warn('[cafes] solid', e); }
     return { root: root, pin: pin, c: c, bub: bub, btex: bt, visitor: null };
   }
   function buildBeacons(T, g) {
