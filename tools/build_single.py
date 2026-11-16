@@ -44,5 +44,6 @@ for m in part_re.finditer(html):
         out.append(f'<script{m.group(3)}>' + embed(read(m.group(4))) + '</script>')
     pos = m.end()
 out.append(embed(html[pos:]))
+os.makedirs(os.path.dirname(os.path.abspath(OUT)), exist_ok=True)
 open(OUT, 'w', encoding='utf-8').write(''.join(out))
 print('written', OUT, os.path.getsize(OUT))
