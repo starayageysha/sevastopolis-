@@ -198,6 +198,7 @@ function apply(g,prof){
           if(l1>=-.12&&l2>=-.12&&l3>=-.12)o[zz*gw+xx]=1}}}
     return {o:o,gw:gw,gh:gh}}
   if(prof.tufts){try{occ=buildOcc()}catch(e){window.__gfxErr='occ '+e.stack}}
+  window.__sevGfxFree=function(x,z){return free(x,z)};/* v184: карта занятости нужна модулю травы */
   function free(x,z){if(!occ)return true;var xi=Math.floor((x-OX)/OC),zi=Math.floor((z-OZ)/OC);if(xi<0||zi<0||xi>=occ.gw||zi>=occ.gh)return false;return !occ.o[zi*occ.gw+xi]}
 
   /* 5. трава и цветы вокруг игрока: одна сетка, пересобирается при движении (thin instances в этой сборке Babylon вырезаны) */
