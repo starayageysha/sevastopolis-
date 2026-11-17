@@ -89,6 +89,7 @@
   var PARK_BOX = [-170, -180, 170, 880]; // где у парка есть подробная карта дорожек
   function classify(g, x, z, pt) {
     var w = g.world; if (!w || !w.surfaceAt) return 0;
+    if (window.SevWater && window.SevWater.isWater) { var wt = window.SevWater.shoreAt(x, z); if (wt && (wt.water || wt.toWater < 1.5 || wt.h < -.3)) return 0; } // v185: не в море и не у самой кромки
     var inPark = x > PARK_BOX[0] && x < PARK_BOX[2] && z > PARK_BOX[1] && z < PARK_BOX[3], park = false;
     if (inPark) {
       if (w.surfaceAt(x, z) !== 'grass') return 0;
@@ -265,6 +266,10 @@
     // уборка: участки, оставшиеся далеко (после телепорта/быстрой езды), удаляем
     st.sweep = (st.sweep || 0) + dt;
     if (st.sweep > .5) { st.sweep = 0; st.chunks.forEach(function (c, k) { var ij = k.split(','), d2 = Math.hypot((+ij[0] + .5) * CH - P.x, (+ij[1] + .5) * CH - P.z); if (d2 > R_FAR + 34) { if (c.mesh) c.mesh.dispose(); st.chunks.delete(k); } }); }
+    // ждём карту берега (не сажаем траву в море); при новом окне — перестраиваем участки у воды
+    var WS = window.SevWater && window.SevWater.state;
+    if (WS && !WS.mask) want = [];
+    if (WS && WS.ver && st.wver !== WS.ver) { st.wver = WS.ver; st.chunks.forEach(function (c, k) { if (c.mesh) c.mesh.dispose(); }); st.chunks.clear(); want = []; }
     want.sort(function (a, b) { return a[0] - b[0]; });
     var budget = 1 + (want.length && want[0][0] < R_FULL ? 1 : 0), t0 = performance.now();
     for (var w = 0; w < want.length && budget > 0 && performance.now() - t0 < 10; w++, budget--) {
