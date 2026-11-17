@@ -23,7 +23,7 @@
    ===================================================================== */
 (function () {
   'use strict';
-  var W = 384, N = 512, CELL = W / N, MAXW = 48, MAXL = 8;
+  var W0 = 384, N0 = 512, W = W0, N = N0, CELL = W / N, MAXW = 48, MAXL = 8;
   var TEST = { x0: -220, z0: 770, x1: 540, z1: 1180 }; // тестовая площадка: пляж Парка Победы
   var LV = 1; try { var sv = localStorage.getItem('sevwater'); if (sv != null) LV = +sv; } catch (e) { }
   var api = window.SevWater = { level: LV, test: TEST, stats: {} };
@@ -34,8 +34,8 @@
 
   /* ---------- 1. карта берега ---------- */
   var STRUCT = /pier|wall|quay|mol|breakwater|bound|bridge|prichal|rock|stone|kamen/i;
-  function buildMask(st, cx, cz) {
-    var t0 = performance.now(), sc = st.sc;
+  function computeMask(sc, cx, cz, Wm, Nn) {
+    var W = Wm || W0, N = Nn || N0, CELL = W / N, MW = MAXW, ML = MAXL;
     var x0 = Math.round(cx - W / 2), z0 = Math.round(cz - W / 2);
     var H = new Float32Array(N * N).fill(-99), T = new Uint8Array(N * N);
     var V = sc.meshes[0] && sc.meshes[0].position.constructor, tmp = V ? new V(0, 0, 0) : null, tris = 0;
@@ -65,10 +65,14 @@
     });
     // суша — где верх выше -0.85 м
     var land = new Uint8Array(N * N); for (var q = 0; q < N * N; q++) land[q] = H[q] > -.96 ? 1 : 0; // граница — там, где суша выходит из воды
-    var dW = edt(land, 1, MAXW / CELL), dL = edt(land, 0, MAXL / CELL);
+    var dW = edt(land, 1, MW / CELL, N), dL = edt(land, 0, Math.max(ML, CELL * 6) / CELL, N);
     // тип ближайшей суши для воды: структура или песок (распространяем на 4 м)
     var near = new Uint8Array(N * N); for (q = 0; q < N * N; q++) near[q] = land[q] ? T[q] : 0;
     for (var it = 0; it < 6; it++) for (var jy = 1; jy < N - 1; jy++) for (var ix = 1; ix < N - 1; ix++) { var id2 = jy * N + ix; if (near[id2]) continue; var v = near[id2 - 1] || near[id2 + 1] || near[id2 - N] || near[id2 + N]; if (v) near[id2] = v; }
+    return { x0: x0, z0: z0, H: H, T: T, land: land, dW: dW, dL: dL, near: near, tris: tris, W: W, N: N, cell: CELL };
+  }
+  function buildMask(st, cx, cz) {
+    var t0 = performance.now(), mk = computeMask(st.sc, cx, cz), x0 = mk.x0, z0 = mk.z0, H = mk.H, T = mk.T, land = mk.land, dW = mk.dW, dL = mk.dL, near = mk.near, tris = mk.tris;
     // текстура: R — метры до суши (вода), G — метры до воды (суша), B — рядом камни/пирс
     var img = st.ctx.createImageData(N, N), D = img.data;
     for (var j = 0; j < N; j++) for (var i3 = 0; i3 < N; i3++) {
@@ -84,7 +88,7 @@
     buildSwash(st);
   }
   // поле расстояний (два прохода, соседи 1 и √2) в клетках
-  function edt(land, target, maxC) {
+  function edt(land, target, maxC, N) {
     var D = new Float32Array(N * N), INF = 1e6, r2 = Math.SQRT2;
     for (var i = 0; i < N * N; i++) D[i] = (land[i] === target) ? 0 : INF;
     for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) { var k = y * N + x, v = D[k]; if (!v) continue;
@@ -94,6 +98,23 @@
     return D;
   }
   function cellAt(x, z) { var M = S && S.mask; if (!M) return -1; var i = Math.floor((x - M.x0) / CELL), j = Math.floor((z - M.z0) / CELL); if (i < 0 || j < 0 || i >= N || j >= N) return -1; return j * N + i; }
+  /* ближайшая к точке вода, где есть свободное место clear (м) от берега; ищем кольцами до maxR */
+  api.findWater = function (x, z, clear, maxR) {
+    var g = G(); if (!g || !g.scene) return null; clear = clear || 6; maxR = maxR || 2400;
+    var centers = [[x, z]];
+    for (var r = 300; r <= maxR; r += 300) for (var k = 0; k < 8 + r / 150; k++) { var a = k / (8 + r / 150) * 6.283; centers.push([x + Math.cos(a) * r, z + Math.sin(a) * r]); }
+    var best = null, bestD = 1e18, ring = -1;
+    for (var ci = 0; ci < centers.length; ci++) {
+      var cr = ci === 0 ? 0 : Math.round(Math.hypot(centers[ci][0] - x, centers[ci][1] - z) / 300);
+      if (best && cr > ring) break; // нашли на ближнем кольце — дальше не ищем
+      var M = computeMask(g.scene, centers[ci][0], centers[ci][1]), need = clear / CELL;
+      for (var j = 2; j < N - 2; j++) for (var i = 2; i < N - 2; i++) { var c = j * N + i; if (M.land[c] || M.dW[c] < need) continue;
+        var wx = M.x0 + (i + .5) * CELL, wz = M.z0 + (j + .5) * CELL, d = (wx - x) * (wx - x) + (wz - z) * (wz - z); if (d < bestD) { bestD = d; best = { x: wx, z: wz }; ring = cr; } }
+    }
+    if (S) S.dirty = true;
+    return best;
+  };
+  api.computeMask = function (cx, cz, Wm, Nn) { var g = G(); return g && g.scene ? computeMask(g.scene, cx, cz, Wm, Nn) : null; };
   api.isWater = function (x, z) { var c = cellAt(x, z); if (c < 0) return null; return !S.mask.land[c]; };
   api.shoreAt = function (x, z) { var c = cellAt(x, z); if (c < 0) return null; var M = S.mask; return { water: !M.land[c], toLand: M.dW[c] * CELL, toWater: M.dL[c] * CELL, type: (M.land[c] ? M.T[c] : M.near[c]) === 2 ? 'rock' : 'sand', h: M.H[c] }; };
   api.height = function (x, z) { var w = window.__sevWave; return (w && w.on ? w.h(x, z) : 0) + (w ? w.y : -1); };

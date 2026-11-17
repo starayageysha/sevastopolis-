@@ -89,6 +89,7 @@
   var PARK_BOX = [-170, -180, 170, 880]; // где у парка есть подробная карта дорожек
   function classify(g, x, z, pt) {
     var w = g.world; if (!w || !w.surfaceAt) return 0;
+    if (window.SevSand && window.SevSand.on && window.SevSand.isSand(x, z)) return 0; // v186: на пляжном песке трава не растёт
     if (window.SevWater && window.SevWater.isWater) { var wt = window.SevWater.shoreAt(x, z); if (wt && (wt.water || wt.toWater < 1.5 || wt.h < -.3)) return 0; } // v185: не в море и не у самой кромки
     var inPark = x > PARK_BOX[0] && x < PARK_BOX[2] && z > PARK_BOX[1] && z < PARK_BOX[3], park = false;
     if (inPark) {

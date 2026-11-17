@@ -7,7 +7,7 @@
    Доступ из кода: window.Sev.version, window.Sev.save.{keys, snapshot, backups, exportFile, importData}. */
 (function () {
   'use strict';
-  var VERSION = 'v185';
+  var VERSION = 'v186';
   var Sev = window.Sev = window.Sev || {};
   Sev.version = VERSION;
 

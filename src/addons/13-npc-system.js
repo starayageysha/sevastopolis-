@@ -505,6 +505,9 @@ Npc.prototype.update = function (dt, pl) {
   if (this.blob) { this.blob.position.set(this.x, gy + 0.03, this.z); var bs = 1 - this.hopY * 0.35; this.blob.scaling.set(bs, 1, bs); }
 };
 
+/* v186: def.post(npc, dt) — модули дополняют позу после обычного обновления (рыбаки сидят и т.п.). Ставится последним. */
+function installPostHook(){if(Npc.prototype.__postHook)return;var base=Npc.prototype.update;Npc.prototype.update=function(dt,pl){base.call(this,dt,pl);if(this.def&&this.def.post&&this.rig){try{this.def.post(this,dt)}catch(e){}}};Npc.prototype.__postHook=1}
+setTimeout(installPostHook,0);
 /* ============================================================
    NPC MANAGER
    ============================================================ */
